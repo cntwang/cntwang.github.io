@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="DiffComplete">
+  <meta name="keywords" content="SSL">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DiffComplete: Diffusion-based Generative 3D Shape Completion</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./diff_static/css/bulma.min.css">
+  <link rel="stylesheet" href="./diff_static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./diff_static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./diff_static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./diff_static/css/index.css">
+  <link rel="icon" href="./diff_static/images/object.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./diff_static/js/fontawesome.all.min.js"></script>
+  <script src="./diff_static/js/bulma-carousel.min.js"></script>
+  <script src="./diff_static/js/bulma-slider.min.js"></script>
+  <script src="./diff_static/js/index.js"></script>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">DiffComplete: Diffusion-based Generative 3D Shape Completion</h1>
+            <div class="is-size-6 publication-authors">
+              <span class="author-block">
+                 <a href="https://ruihangchu.com">Ruihang Chu</a><sup>1</sup>,  </span>
+              <span class="author-block">
+                 <a href="https://xieenze.github.io/">Enze Xie</a><sup>2</sup>,  </span>
+              <span class="author-block">
+                 <a href="https://scholar.google.com/citations?user=6aYncPAAAAAJ&hl=en">Shentong Mo</a><sup>3</sup>,  </span>
+              <span class="author-block">
+                 <a href="https://scholar.google.com/citations?user=XboZC1AAAAAJ&hl=en">Zhenguo Li</a><sup>2</sup>,  </span>
+              <span class="author-block">
+                 <a href="https://niessnerlab.org/"> Matthias Nießner</a><sup>4</sup>,  </span>
+              <span class="author-block">
+                 <a href="https://www.cse.cuhk.edu.hk/~cwfu/">Chi-Wing Fu</a><sup>1</sup>,  </span>
+              <span class="author-block">
+                 <a href="https://jiaya.me/">Jiaya Jia</a><sup>1</sup></span>
+            </div>
+  
+            <div class="is-size-6 publication-authors">
+              <span class="author-block"><sup>1</sup>The Chinese University of Hong Kong,  </span>
+              <span class="author-block"><sup>2</sup>Huawei Noah's Ark Lab,  </span>
+              <span class="author-block"><sup>3</sup>MBZUAI,  </span>
+              <span class="author-block"><sup>4</sup>Technical University of Munich</span>
+            </div>
+  
+          </div>
+        </div>
+         <div class="column has-text-centered">
+              <div class="publication-links">
+  
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <span class="link-block">
+                  <a href="https://www.youtube.com/watch?v=aCBu5yZEvVI"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://diffcomplete.github.io/"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (soon)</span>
+                    </a>
+                </span>
+  
+              </div>
+           </div>
+      </div>
+    </div>
+  </section>
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+
+      <!--
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="https://www.youtube.com/embed/FacVM2oIlUY" type="video/mp4">
+      </video>
+      -->
+
+      <div class="center-video">
+        <iframe width="840" height="472`" src="https://www.youtube.com/embed/aCBu5yZEvVI?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+        </iframe>
+      </div>
+
+
+      <h2 class="subtitle has-text-centered">
+        We propose DiffComplete, a new diffusion-based approach to enable multimodal, realistic, and high-fidelity 3D shape completion.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<!--##################################   Abstract   ##################################-->
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We introduce a new diffusion-based approach for shape completion on 3D range scans.
+            Compared with prior deterministic and probabilistic methods, we strike a balance between realism, multi-modality, and high fidelity.
+            We propose DiffComplete by casting shape completion as a generative task conditioned on the incomplete shape.
+            Our key designs are two-fold.
+            First, we devise a hierarchical feature aggregation mechanism to inject conditional features in a spatially-consistent manner.
+            So, we can capture both local details and broader contexts of the conditional inputs to control the shape completion.
+            Second, we propose an occupancy-aware fusion strategy in our model to enable the completion of multiple partial shapes and introduce higher flexibility on the input conditions.
+            DiffComplete sets a new SOTA performance on two large-scale 3D shape completion benchmarks.
+            Our completed shapes not only have a realistic outlook compared with the deterministic methods but also exhibit high similarity to the ground truths compared with the probabilistic alternatives.
+            Further, DiffComplete has strong generalizability on objects of entirely unseen classes for both synthetic and real data, eliminating the need for model re-training in various applications.
+          </p>
+          <p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="center">
+      <h2 class="title is-4">Complete Objects of Diverse Known Categories</h2>
+    </div>
+    
+    <div class="columns is-centered">
+
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-3"> </h2>
+          <!-- <p>
+            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
+            would be impossible without nerfies since it would require going through a wall.
+          </p> -->
+          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+            <source src="./diff_static/videos/video_1_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="column">
+        <h2 class="title is-3"> </h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <!-- <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p> -->
+            <video id="matting-video" autoplay controls muted loop playsinline height="100%">
+              <source src="./diff_static/videos/video_1_2.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-3"> </h2>
+          <!-- <p>
+            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
+            would be impossible without nerfies since it would require going through a wall.
+          </p> -->
+          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+            <source src="./diff_static/videos/video_1_3.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="column">
+        <h2 class="title is-3"> </h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <!-- <p>
+              As a byproduct of our method, we can also solve the matting problem by ignoring
+              samples that fall outside of a bounding box during rendering.
+            </p> -->
+            <video id="matting-video" autoplay controls muted loop playsinline height="100%">
+              <source src="./diff_static/videos/video_1_4.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="center">
+      <h2 class="title is-4">Complete Objects of <span style="color:rgb(51, 156, 255)">Entirely Unseen</span> Categories</h2>
+    </div>
+    <br>
+
+    <div class="columns is-centered">
+
+      <div class="column">
+        <div class="center">
+          <div class="content">
+          <h2 class="title is-5">Synthetic Objects</h2>
+          </div>
+          <!-- <p>
+            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
+            would be impossible without nerfies since it would require going through a wall.
+          </p> -->
+          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+            <source src="./diff_static/videos/video_2_1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+      
+
+      <div class="column">
+        <div class="center">
+          <h2 class="title is-5">Real Objects</h2>
+          <div class="columns is-centered">
+            <div class="column content">
+              <!-- <p>
+                As a byproduct of our method, we can also solve the matting problem by ignoring
+                samples that fall outside of a bounding box during rendering.
+              </p> -->
+              <video id="matting-video" autoplay controls muted loop playsinline height="100%">
+                <source src="./diff_static/videos/video_2_2.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+          </div>  
+
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3"> </h2>
+        <div class="center">
+        <h3 class="title is-4">Multmodal Completion Results</h3>
+        </div>
+        <br>
+        <div class="content has-text-justified">
+          <div class="center">
+          <p>
+             Given the same input (left), DiffComplete is able to produce multiple plausible completion results (right).
+          </p>
+          </div> 
+        </div>
+        <div class="content has-text-centered">
+          <video id="replay-video"
+                 controls
+                 muted
+                 preload
+                 playsinline
+                 width="75%">
+            <source src="./diff_static/videos/video_multimodal.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4"> </h2>
+        <div class="center">
+        <h3 class="title is-4">Multiple Conditional Inputs</h3>
+        </div>
+        <br>
+        <div class="content has-text-justified">
+          <div class="center">
+          <p>
+            When we gradually introduce more partial shapes of the same object, DiffComplete can incorporate the local
+            structures of all partial inputs to improve the completion accuracy.
+          </p>
+          </div> 
+        </div>
+        <div class="content has-text-centered">
+          <video id="replay-video"
+                 controls
+                 muted
+                 preload
+                 playsinline
+                 width="75%">
+            <source src="./diff_static/videos/video_multinput.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<section class="section">
+  <div class="container is-max-widescreen">
+    <div class="rows">
+      <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+
+        </div>
+        </br>
+        <img src="diff_static/images/method.png" class="interpolation-image"
+         alt="Interpolate start reference image." />
+        </br>
+        </br>
+        <div class="content has-text-justified">
+          <p>
+            <b>Figure 1. An overview of DiffComplete framework.</b> Given a corrupted complete shape 
+            x_t (diffused from x_0) and an incomplete scan c, we first process them into ε_x(x_t) 
+            and ε_c(c) to align the distributions. We employ a main branch to forward ε_x(x_t), 
+            and a control branch to propagate their fused features f into deep layers. Multi-level features of f 
+            are aggregated into the main branch for hierarchical control in predicting the diffusion noise. 
+            To support multiple partial scans as condition, e.g., two scans {c_1,c_2}, we switch on occupancy-aware fusion. 
+            This strategy utilizes the occupancy masks to enable a weighted feature fusion for c_1 and c_2 by considering their geometry reliability before feeding them into the main branch.
+          </p>
+        </div>
+
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-widescreen">
+    <div class="rows">
+      <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Experiments</h2>
+        <div class="content has-text-justified">
+        </div>
+        </br>
+        <img src="diff_static/images/known_cat.png" class="interpolation-image"
+         alt="Interpolate start reference image." />
+        </br>
+        </br>
+        <div class="content has-text-justified">
+          <p>
+            <b>Comparisons with SOTA methods on ShapeNet objects of known categories.</b>
+            DiffComplete improves over state of the arts by <b>40%</b> in l1-error (0.053 v.s. 0.088).
+          </p>
+        </div>
+
+        <div class="content has-text-justified">
+        </div>
+        </br>
+        <img src="diff_static/images/unknown_shapenet.png" class="interpolation-image"
+         alt="Interpolate start reference image." />
+        </br>
+        </br>
+        <div class="content has-text-justified">
+          <p>
+            <b>Comparisons with SOTA methods on ShapeNet objects of entirely unseen categories.</b>
+            ·/· means CD/IoU. DiffComplete exhibits the best completion quality on average for eight unseen object categories, despite lacking zero-shot designs.
+          </p>
+        </div>
+
+        <div class="content has-text-justified">
+        </div>
+        </br>
+        <img src="diff_static/images/unknown_scannet.png" class="interpolation-image"
+         alt="Interpolate start reference image." />
+        </br>
+        </br>
+        <div class="content has-text-justified">
+          <p>
+            <b>Comparisons with SOTA methods on real-world ScanNet objects of entirely unseen categories.</b>
+            DiffComplete also achieves the best completion quality with real-world scans, which are often cluttered and noisy.
+          </p>
+        </div>
+
+        <div class="content has-text-justified">
+        </div>
+        </br>
+        <img src="diff_static/images/vis_seen.png" class="interpolation-image"
+         alt="Interpolate start reference image." />
+        </br>
+        </br>
+        <div class="content has-text-justified">
+          <p>
+            <b>Shape Completion on various known object classes.</b>
+            DiffComplete produces much more realistic and high-fidelity object shapes than previous methods.
+          </p>
+        </div>
+
+        <div class="content has-text-justified">
+        </div>
+        </br>
+        <img src="diff_static/images/vis_unseen.png" class="interpolation-image"
+         alt="Interpolate start reference image." />
+        </br>
+        </br>
+        <div class="content has-text-justified">
+          <p>
+            <b>Shape completion on synthetic (blue) and real (yellow) objects of entirely unseen classes.</b>
+            The 3D shapes produced by DiffComplete stand out for their impressive global coherence and local details.
+          </p>
+        </div>
+
+      </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <h3 class="title">Acknowledgements</h3>
+          <p>
+            The website template was borrowed from <a href="https://nerfies.github.io/">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+<!--
+
+</body>
+</html>
