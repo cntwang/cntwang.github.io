@@ -2,9 +2,9 @@
 title: Ruihang Chu
 SEOTitle: Ruihang Chu
 header-img: img/Transparent_1.jpg
-email:  rhchu [at] cse.cuhk.edu.hk
-description: "Nothing for nothing"
-keyword: "Deep Learning, Computer Vision, Robotics"
+email:  ruihangchu [at] gmail.com
+# description: "Nothing for nothing"
+# keyword: "Deep Learning, Computer Vision, Robotics"
 # url: "http://ruihang-chu.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 # github_repo: "https://github.com/ruihang-chu/ruihang-chu.github.io" # you code repository
